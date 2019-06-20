@@ -35,3 +35,5 @@ gen
 
 target/
 .mvn/
+src/main/resources/
+src/test/

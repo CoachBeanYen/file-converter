@@ -12,7 +12,7 @@ import java.io.OutputStream;
 interface FileConverter {
 
     /**
-     * convert to stream by stream
+     * convert to stream by stream,implementation class should override this method
      *
      * @param in
      * @param os
