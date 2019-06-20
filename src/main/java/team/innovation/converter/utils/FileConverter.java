@@ -21,5 +21,4 @@ interface FileConverter {
         throw new RuntimeException("Converter didn't implemented this method");
     }
 
-    ;
 }
