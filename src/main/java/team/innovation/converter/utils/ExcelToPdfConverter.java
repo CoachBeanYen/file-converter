@@ -108,12 +108,20 @@ public class ExcelToPdfConverter implements PdfGenerator, FileConverter {
                 float height = 0;
                 float width = 0;
                 if (cell == null) {// fill blank cell
-                    com.itextpdf.layout.element.Cell blankCell = new com.itextpdf.layout.element.Cell();
-                    if (!configuration.isFillBlankWithBorder())
-                        blankCell.setBorder(Border.NO_BORDER);
-                    blankCell.setHeight(row.getHeightInPoints());
-                    table.addCell(blankCell);
-                    continue;
+                    for (CellRangeAddress mr : usedCellRangeAddress) {
+						if (mr.containsRow(i) && mr.containsColumn(j)) {
+							inRange = true;
+							break;
+						}
+					}
+					if (inRange)// skip cell which in used cell range address
+						continue;
+					com.itextpdf.layout.element.Cell blankCell = new com.itextpdf.layout.element.Cell();
+					if (!configuration.isFillBlankWithBorder())
+						blankCell.setBorder(Border.NO_BORDER);
+					blankCell.setHeight(row.getHeightInPoints());
+					table.addCell(blankCell);
+					continue;
                 }
                 boolean inRange = false;
                 CellRangeAddress address = null;
@@ -133,14 +141,6 @@ public class ExcelToPdfConverter implements PdfGenerator, FileConverter {
                                 height += sheet.getRow(k).getHeightInPoints();
                             }
                             pdfCell.setHeight(height);
-                        }
-                        if (address.getFirstColumn() == address.getLastColumn()) {
-                            width = sheet.getColumnWidthInPixels(j);
-                        } else {
-                            for (int k = address.getFirstColumn(); k < address.getLastColumn(); k++) {
-                                width += sheet.getColumnWidthInPixels(j);
-                            }
-                            pdfCell.setWidth(width);
                         }
                     } else
                         continue;
