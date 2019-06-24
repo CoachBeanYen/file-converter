@@ -10,8 +10,8 @@ import team.innovation.converter.confs.ExcelToPdfConfiguration;
  * 	<code>FileInputStream excelStream = new FileInputStream(inputFile);
  *	FileOutputStream out = new FileOutputStream(outPutFile);
  *	ExcelToPdfConfiguration configuration = new ExcelToPdfConfiguration(PageSize.A4, false, true);
- *	Excel2PdfConverter excel2PdfConverter = PdfConverterFactory.INSTANCE.excel2PdfConverter(configuration);
- *	excel2PdfConverter.excelToPdf(excelStream, out);</code>
+ *	ExcelToPdfConverter excelToPdfConverter = PdfConverterFactory.INSTANCE.excelToPdfConverter(configuration);
+ *	excelToPdfConverter.excelToPdf(excelStream, out);</code>
  * </pre>
  * 
  * @author bin.yan
