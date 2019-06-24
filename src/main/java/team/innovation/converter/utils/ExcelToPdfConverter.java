@@ -106,22 +106,21 @@ public class ExcelToPdfConverter implements PdfGenerator, FileConverter {
             for (int j = 0; j < table.getNumberOfColumns(); j++) {
                 Cell cell = row.getCell(j);
                 float height = 0;
-                float width = 0;
                 if (cell == null) {// fill blank cell
                     for (CellRangeAddress mr : usedCellRangeAddress) {
-						if (mr.containsRow(i) && mr.containsColumn(j)) {
-							inRange = true;
-							break;
-						}
-					}
-					if (inRange)// skip cell which in used cell range address
-						continue;
-					com.itextpdf.layout.element.Cell blankCell = new com.itextpdf.layout.element.Cell();
-					if (!configuration.isFillBlankWithBorder())
-						blankCell.setBorder(Border.NO_BORDER);
-					blankCell.setHeight(row.getHeightInPoints());
-					table.addCell(blankCell);
-					continue;
+		        if (mr.containsRow(i) && mr.containsColumn(j)) {
+		            inRange = true;
+			    break;
+			}
+		    }
+		    if (inRange)// skip cell which in used cell range address
+		        continue;
+		    com.itextpdf.layout.element.Cell blankCell = new com.itextpdf.layout.element.Cell();
+		    if (!configuration.isFillBlankWithBorder())
+			blankCell.setBorder(Border.NO_BORDER);
+		    blankCell.setHeight(row.getHeightInPoints());
+		    table.addCell(blankCell);
+		    continue;
                 }
                 boolean inRange = false;
                 CellRangeAddress address = null;
